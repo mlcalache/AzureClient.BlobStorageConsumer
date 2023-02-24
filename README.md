@@ -1,0 +1,1 @@
+# AzureClient.BlobStorageConsumer
