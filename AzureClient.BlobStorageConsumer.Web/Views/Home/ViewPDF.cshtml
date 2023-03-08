@@ -22,7 +22,7 @@
 @*<div id="pdf_container"></div>*@
 
 <a href="/Home/Index" class="btn btn-primary">Back</a>
-<button onclick="LoadPdfFromUrl2('@Model');" class="btn btn-primary">Load</button>
+@*<button onclick="LoadPdfFromUrl2('@Model');" class="btn btn-primary">Load</button>*@
 
 <object id="pdf_container2" width="827" height="1200" data="" type="application/pdf">
     <div>No online PDF viewer installed</div>
@@ -86,10 +86,10 @@
     //LoadPdfFromUrl('@Model');
 
     function LoadPdfFromUrl2(url) {
-        alert(url);
+        //alert(url);
         var pdf_container = document.getElementById("pdf_container2");
         pdf_container.data = url;
     }
 
-    //LoadPdfFromUrl2('@Model');
+    LoadPdfFromUrl2('@Model');
 </script>
