@@ -1,8 +1,8 @@
 ﻿using AzureClient.BlobStorageConsumer.Domain.Interfaces.Services;
 
-namespace AzureClient.BlobStorageConsumer.Domain.Services
+namespace AzureClient.BlobStorageConsumer.Infrastructure.Services
 {
-    public class FileService : IFileService
+    public class FileStreamService : IFileStreamService
     {
         public byte[] GetBytesFromStream(Stream input)
         {

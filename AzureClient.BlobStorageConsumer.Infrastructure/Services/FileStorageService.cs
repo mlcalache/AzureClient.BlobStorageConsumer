@@ -1,14 +1,13 @@
 ﻿using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using AzureClient.BlobStorageConsumer.Domain.Entities;
-using AzureClient.BlobStorageConsumer.Domain.Interfaces;
 using AzureClient.BlobStorageConsumer.Domain.Interfaces.Services;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 
-namespace AzureClient.BlobStorageConsumer.Infrastructure
+namespace AzureClient.BlobStorageConsumer.Infrastructure.Services
 {
-    public class BlobStorageService : IBlobStorageService
+    public class FileStorageService : IFileStorageService
     {
         public static async Task DownloadToStreamAsync(BlobClient blobClient, string localFilePath)
         {
@@ -39,7 +38,7 @@ namespace AzureClient.BlobStorageConsumer.Infrastructure
             return streaming.Content;
         }
 
-        public async Task<List<BlobStorage>> GetAllBlobFilesAsync(string storageConnectionString, string storageContainerName)
+        public async Task<List<FileStorage>> GetAllBlobFilesAsync(string storageConnectionString, string storageContainerName)
         {
             try
             {
@@ -48,16 +47,16 @@ namespace AzureClient.BlobStorageConsumer.Infrastructure
 
                 BlobResultSegment resultSegment = await container.ListBlobsSegmentedAsync(string.Empty,
                     true, BlobListingDetails.Metadata, 100, null, null, null);
-                List<BlobStorage> fileList = new List<BlobStorage>();
+                List<FileStorage> fileList = new List<FileStorage>();
 
                 foreach (var blobItem in resultSegment.Results)
                 {
                     // A flat listing operation returns only blobs, not virtual directories.
                     var blob = (CloudBlob)blobItem;
-                    fileList.Add(new BlobStorage()
+                    fileList.Add(new FileStorage()
                     {
                         FileName = blob.Name,
-                        FileSize = Math.Round((blob.Properties.Length / 1024f) / 1024f, 2).ToString(),
+                        FileSize = Math.Round(blob.Properties.Length / 1024f / 1024f, 2).ToString(),
                         Modified = DateTime.Parse(blob.Properties.LastModified.ToString()).ToLocalTime().ToString(),
                         Uri = blob.Uri.ToString()
                     });

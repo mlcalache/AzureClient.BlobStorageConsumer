@@ -1,14 +1,13 @@
 using AzureClient.BlobStorageConsumer.Domain.Interfaces.Services;
-using AzureClient.BlobStorageConsumer.Domain.Services;
-using AzureClient.BlobStorageConsumer.Infrastructure;
+using AzureClient.BlobStorageConsumer.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<IBlobStorageService, BlobStorageService>();
-builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<IFileStorageService, FileStorageService>();
+builder.Services.AddScoped<IFileStreamService, FileStreamService>();
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 

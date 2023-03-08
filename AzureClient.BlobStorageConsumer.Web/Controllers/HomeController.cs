@@ -9,13 +9,13 @@ namespace AzureClient.BlobStorageConsumer.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        private readonly IBlobStorageService _blobStorage;
-        private readonly IFileService _fileService;
+        private readonly IFileStorageService _blobStorage;
+        private readonly IFileStreamService _fileService;
 
         private readonly string _storageConnectionString;
         private readonly string _storageContainerName;
 
-        public HomeController(ILogger<HomeController> logger, IBlobStorageService blobStorage, IFileService fileService, IConfiguration configuration)
+        public HomeController(ILogger<HomeController> logger, IFileStorageService blobStorage, IFileStreamService fileService, IConfiguration configuration)
         {
             _logger = logger;
             _blobStorage = blobStorage;

@@ -2,7 +2,7 @@
 
 namespace AzureClient.BlobStorageConsumer.Domain.Entities
 {
-    public class BlobStorage
+    public class FileStorage
     {
         [Display(Name = "File Name")]
         public string FileName { get; set; }

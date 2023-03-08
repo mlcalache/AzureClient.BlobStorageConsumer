@@ -2,7 +2,7 @@
 
 namespace AzureClient.BlobStorageConsumer.Domain.Interfaces.Services
 {
-    public interface IFileService
+    public interface IFileStreamService
     {
         byte[] GetBytesFromStream(Stream input);
     }
