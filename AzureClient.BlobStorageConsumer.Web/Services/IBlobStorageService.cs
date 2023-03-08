@@ -1,15 +1,15 @@
-﻿using AzureClient.BlobStorageConsumer.Web.Models;
+﻿//using AzureClient.BlobStorageConsumer.Web.Models;
 
-namespace AzureClient.BlobStorageConsumer.Web.Services
-{
-    public interface IBlobStorageService
-    {
-        Task<List<BlobStorage>> GetAllBlobFiles();
+//namespace AzureClient.BlobStorageConsumer.Web.Services
+//{
+//    public interface IBlobStorageService
+//    {
+//        Task<List<BlobStorage>> GetAllBlobFiles();
 
-        Task UploadBlobFileAsync(IFormFile files);
+//        Task UploadBlobFileAsync(IFormFile files);
 
-        Task DeleteDocumentAsync(string blobName);
+//        Task DeleteDocumentAsync(string blobName);
 
-        Task<Stream> GetFileAsync(string blobName);
-    }
-}
+//        Task<Stream> GetFileAsync(string blobName);
+//    }
+//}

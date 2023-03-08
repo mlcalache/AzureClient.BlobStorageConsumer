@@ -1,4 +1,6 @@
-using AzureClient.BlobStorageConsumer.Web.Services;
+using AzureClient.BlobStorageConsumer.Domain.Interfaces.Services;
+using AzureClient.BlobStorageConsumer.Domain.Services;
+using AzureClient.BlobStorageConsumer.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 

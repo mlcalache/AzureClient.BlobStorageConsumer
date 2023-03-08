@@ -1,5 +1,5 @@
-﻿using AzureClient.BlobStorageConsumer.Web.Models;
-using AzureClient.BlobStorageConsumer.Web.Services;
+﻿using AzureClient.BlobStorageConsumer.Domain.Interfaces.Services;
+using AzureClient.BlobStorageConsumer.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -12,16 +12,22 @@ namespace AzureClient.BlobStorageConsumer.Web.Controllers
         private readonly IBlobStorageService _blobStorage;
         private readonly IFileService _fileService;
 
-        public HomeController(ILogger<HomeController> logger, IBlobStorageService blobStorage, IFileService fileService)
+        private readonly string _storageConnectionString;
+        private readonly string _storageContainerName;
+
+        public HomeController(ILogger<HomeController> logger, IBlobStorageService blobStorage, IFileService fileService, IConfiguration configuration)
         {
             _logger = logger;
             _blobStorage = blobStorage;
             _fileService = fileService;
+
+            _storageConnectionString = configuration.GetValue<string>("BlobConnectionString");
+            _storageContainerName = configuration.GetValue<string>("BlobContainerName");
         }
 
         public async Task<IActionResult> Index()
         {
-            return View(await _blobStorage.GetAllBlobFiles());
+            return View(await _blobStorage.GetAllBlobFilesAsync(_storageConnectionString, _storageContainerName));
         }
 
         [HttpGet]
@@ -33,17 +39,26 @@ namespace AzureClient.BlobStorageConsumer.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Upload(List<IFormFile> files)
         {
+            var streams = new List<MemoryStream>();
+
             foreach (var file in files)
             {
-                await _blobStorage.UploadBlobFileAsync(file);
+                using (var target = new MemoryStream())
+                {
+                    file.CopyTo(target);
+                    streams.Add(target);
+
+                    await _blobStorage.UploadBlobFileAsync(target, file.FileName, _storageConnectionString, _storageContainerName);
+                }
             }
+
             return RedirectToAction("Index");
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(string blobName)
         {
-            await _blobStorage.DeleteDocumentAsync(blobName);
+            await _blobStorage.DeleteDocumentAsync(blobName, _storageConnectionString, _storageContainerName);
             return RedirectToAction("Index", "Home");
         }
 
@@ -55,7 +70,7 @@ namespace AzureClient.BlobStorageConsumer.Web.Controllers
 
         public async Task<IActionResult> DownloadFile(string blobName)
         {
-            var str = await _blobStorage.GetFileAsync(blobName);
+            var str = await _blobStorage.GetFileAsync(blobName, _storageConnectionString, _storageContainerName);
 
             var data = _fileService.GetBytesFromStream(str);
 
