@@ -70,7 +70,7 @@ namespace AzureClient.BlobStorageConsumer.Web.Controllers
 
         public async Task<IActionResult> DownloadFile(string blobName)
         {
-            var str = await _blobStorage.GetFileAsync(blobName, _storageConnectionString, _storageContainerName);
+            var str = await _blobStorage.GetBlobFileAsync(blobName, _storageConnectionString, _storageContainerName);
 
             var data = _fileService.GetBytesFromStream(str);
 

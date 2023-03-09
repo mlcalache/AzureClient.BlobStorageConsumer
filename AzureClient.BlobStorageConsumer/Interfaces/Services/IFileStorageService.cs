@@ -10,6 +10,6 @@ namespace AzureClient.BlobStorageConsumer.Domain.Interfaces.Services
 
         Task DeleteDocumentAsync(string blobName, string storageConnectionString, string storageContainerName);
 
-        Task<Stream> GetFileAsync(string blobName, string storageConnectionString, string storageContainerName);
+        Task<Stream> GetBlobFileAsync(string blobName, string storageConnectionString, string storageContainerName);
     }
 }

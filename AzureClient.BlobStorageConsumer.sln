@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureClient.BlobStorageCons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureClient.BlobStorageConsumer.Infrastructure", "AzureClient.BlobStorageConsumer.Infrastructure\AzureClient.BlobStorageConsumer.Infrastructure.csproj", "{EA0D0890-CC2E-462C-B859-544267384ED2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureClient.BlobStorageConsumer.API", "AzureClient.BlobStorageConsumer.API\AzureClient.BlobStorageConsumer.API.csproj", "{1AB0C9E2-CC99-4210-BC16-9F5427AED983}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{EA0D0890-CC2E-462C-B859-544267384ED2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA0D0890-CC2E-462C-B859-544267384ED2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA0D0890-CC2E-462C-B859-544267384ED2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AB0C9E2-CC99-4210-BC16-9F5427AED983}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AB0C9E2-CC99-4210-BC16-9F5427AED983}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AB0C9E2-CC99-4210-BC16-9F5427AED983}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AB0C9E2-CC99-4210-BC16-9F5427AED983}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

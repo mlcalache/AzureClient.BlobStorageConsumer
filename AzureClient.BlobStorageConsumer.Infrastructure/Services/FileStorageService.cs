@@ -24,7 +24,7 @@ namespace AzureClient.BlobStorageConsumer.Infrastructure.Services
             }
         }
 
-        public async Task<Stream> GetFileAsync(string blobName, string storageConnectionString, string storageContainerName)
+        public async Task<Stream> GetBlobFileAsync(string blobName, string storageConnectionString, string storageContainerName)
         {
             BlobContainerClient container = new BlobContainerClient(storageConnectionString, storageContainerName);
             container.CreateIfNotExists(PublicAccessType.Blob);

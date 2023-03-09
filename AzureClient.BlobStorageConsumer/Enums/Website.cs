@@ -2,7 +2,7 @@
 {
     public enum Website
     {
-        FundaWonen = 1,
-        FundaInBusiness = 2
+        Housing = 1,
+        Business = 2
     }
 }
