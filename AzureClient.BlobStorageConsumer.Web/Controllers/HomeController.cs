@@ -1,4 +1,5 @@
 ﻿using AzureClient.BlobStorageConsumer.Domain.Interfaces.Services;
+using AzureClient.BlobStorageConsumer.Infrastructure.HttpClients;
 using AzureClient.BlobStorageConsumer.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -11,15 +12,17 @@ namespace AzureClient.BlobStorageConsumer.Web.Controllers
 
         private readonly IFileStorageService _blobStorage;
         private readonly IFileStreamService _fileService;
+        private readonly IBlobStorageConsumerApiHttpClient _blobStorageConsumerApiHttpClient;
 
         private readonly string _storageConnectionString;
         private readonly string _storageContainerName;
 
-        public HomeController(ILogger<HomeController> logger, IFileStorageService blobStorage, IFileStreamService fileService, IConfiguration configuration)
+        public HomeController(ILogger<HomeController> logger, IFileStorageService blobStorage, IFileStreamService fileService, IConfiguration configuration, IBlobStorageConsumerApiHttpClient blobStorageConsumerApiHttpClient)
         {
             _logger = logger;
             _blobStorage = blobStorage;
             _fileService = fileService;
+            _blobStorageConsumerApiHttpClient = blobStorageConsumerApiHttpClient;
 
             _storageConnectionString = configuration.GetValue<string>("BlobConnectionString");
             _storageContainerName = configuration.GetValue<string>("BlobContainerName");
@@ -27,7 +30,11 @@ namespace AzureClient.BlobStorageConsumer.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _blobStorage.GetAllBlobFilesAsync(_storageConnectionString, _storageContainerName));
+            var result = await _blobStorageConsumerApiHttpClient.GetAllBlobFilesAsync();
+
+            return View(result);
+
+            //return View(await _blobStorage.GetAllBlobFilesAsync(_storageConnectionString, _storageContainerName));
         }
 
         [HttpGet]
